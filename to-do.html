@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="name" placeholder="Enter your name">
+    <button id="add">ADD</button><br><br>
+    <div id="list"></div>
+    <!-- <button id="edit">Edit</button> -->
+</body>
+<script>
+    let nameInput = document.getElementById("name")
+    let add = document.getElementById("add")
+    let list = document.getElementById("list")
+    
+    function addName(){ 
+         let name = nameInput.value
+        //  list.innerHTML = name
+        list.innerHTML += `
+        <div>
+    <span class="displayName">${name}</span>
+    <button class="edit" onclick="editName(this)">Edit</button>
+    <button class="delete" onclick="deleteName(this)">Delete</button>
+    <button class="update" onclick="updateName(this)">Update</button>
+    </div><br>
+`;
+        nameInput.value = "";
+        
+       }     
+    
+function deleteName(e){
+    e.parentElement.remove()
+        // list.innerHTML = "" 
+    }
+let editRow
+function editName(e){
+    editRow = e.parentElement
+    let displayName = editRow.getElementsByClassName("displayName")[0]
+
+    nameInput.value = displayName.innerText;
+}
+function updateName(e) {
+    let displayName = editRow.getElementsByClassName("displayName")[0]
+
+    displayName.innerText = nameInput.value;
+
+    nameInput.value = "";
+}
+    add.addEventListener("click", addName)
+     
+</script>
+</html>
